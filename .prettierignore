@@ -1,0 +1,20 @@
+# Build outputs
+.next/
+out/
+dist/
+build/
+
+# Dependencies
+node_modules/
+
+# Auto-generated
+*.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Supabase generated types (managed by CLI)
+src/types/database.ts
+
+# Env files
+.env*
