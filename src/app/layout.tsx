@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
+import { Inter, Playfair_Display, JetBrains_Mono, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Fonts — loaded via next/font, zero layout shift, auto-hosted on Vercel CDN
@@ -101,7 +105,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${playfairDisplay.variable} ${jetbrainsMono.variable}`}
+      className={cn(inter.variable, playfairDisplay.variable, jetbrainsMono.variable, "font-sans", geist.variable)}
     >
       <body className="bg-bg text-text-primary font-body antialiased">
         {children}
