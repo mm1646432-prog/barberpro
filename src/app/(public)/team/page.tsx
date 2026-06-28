@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { SectionHeader } from "@/components/common/SectionHeader";
-import { TeamPreview } from "@/components/public/home/TeamPreview";
-import type { TeamMemberPreviewItem } from "@/components/public/home/TeamPreview";
+import { SectionDivider } from "@/components/common/SectionDivider";
+import { TeamGrid } from "@/components/public/team/TeamGrid";
+import type { BarberCardProps } from "@/components/public/team/BarberCard";
 
 export const metadata: Metadata = {
   title: "Our Team",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     "Meet the barbers behind the craft. Experienced, passionate, and dedicated to making you look your best.",
 };
 
-async function getTeam(): Promise<TeamMemberPreviewItem[]> {
+async function getTeam(): Promise<BarberCardProps[]> {
   const supabase = await createClient();
 
   const { data } = await supabase
@@ -33,23 +34,20 @@ export default async function TeamPage(): Promise<React.JSX.Element> {
   const members = await getTeam();
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <SectionHeader
-        eyebrow="The crew"
-        heading="Meet Our Barbers"
-        description="Master craftsmen dedicated to precision grooming and a great experience every visit."
-      />
+    <>
+      <div className="mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8">
+        <SectionHeader
+          eyebrow="The crew"
+          heading="Meet Our Barbers"
+          description="Master craftsmen dedicated to precision grooming and a great experience every visit. Book directly with the barber of your choice."
+        />
+      </div>
 
-      {members.length > 0 ? (
-        <TeamPreview members={members} />
-      ) : (
-        <p
-          className="text-sm"
-          style={{ color: "var(--color-text-muted)" }}
-        >
-          Team information coming soon.
-        </p>
-      )}
-    </div>
+      <SectionDivider />
+
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <TeamGrid members={members} />
+      </div>
+    </>
   );
 }
