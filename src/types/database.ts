@@ -14,16 +14,499 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      appointments: {
+        Row: {
+          admin_note: string | null
+          cancel_token: string
+          cancelled_at: string | null
+          cancelled_by: string | null
+          created_at: string
+          customer_id: string | null
+          customer_note: string | null
+          employee_id: string | null
+          end_at: string
+          id: string
+          price_snapshot: number | null
+          service_id: string | null
+          start_at: string
+          status: Database["public"]["Enums"]["appointment_status"]
+          updated_at: string
+        }
+        Insert: {
+          admin_note?: string | null
+          cancel_token?: string
+          cancelled_at?: string | null
+          cancelled_by?: string | null
+          created_at?: string
+          customer_id?: string | null
+          customer_note?: string | null
+          employee_id?: string | null
+          end_at: string
+          id?: string
+          price_snapshot?: number | null
+          service_id?: string | null
+          start_at: string
+          status?: Database["public"]["Enums"]["appointment_status"]
+          updated_at?: string
+        }
+        Update: {
+          admin_note?: string | null
+          cancel_token?: string
+          cancelled_at?: string | null
+          cancelled_by?: string | null
+          created_at?: string
+          customer_id?: string | null
+          customer_note?: string | null
+          employee_id?: string | null
+          end_at?: string
+          id?: string
+          price_snapshot?: number | null
+          service_id?: string | null
+          start_at?: string
+          status?: Database["public"]["Enums"]["appointment_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "employees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      business_profile: {
+        Row: {
+          address: string | null
+          buffer_minutes: number
+          cancellation_hours: number
+          city: string | null
+          country: string | null
+          cover_url: string | null
+          created_at: string
+          default_currency: string
+          default_locale: string
+          default_timezone: string
+          description: string | null
+          email: string | null
+          id: string
+          logo_url: string | null
+          maps_embed: string | null
+          max_advance_days: number
+          name: string
+          phone: string | null
+          reminder_hours: number[]
+          slot_duration_minutes: number
+          slug: string
+          social_facebook: string | null
+          social_instagram: string | null
+          social_tiktok: string | null
+          social_twitter: string | null
+          social_youtube: string | null
+          tagline: string | null
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          buffer_minutes?: number
+          cancellation_hours?: number
+          city?: string | null
+          country?: string | null
+          cover_url?: string | null
+          created_at?: string
+          default_currency?: string
+          default_locale?: string
+          default_timezone?: string
+          description?: string | null
+          email?: string | null
+          id?: string
+          logo_url?: string | null
+          maps_embed?: string | null
+          max_advance_days?: number
+          name: string
+          phone?: string | null
+          reminder_hours?: number[]
+          slot_duration_minutes?: number
+          slug: string
+          social_facebook?: string | null
+          social_instagram?: string | null
+          social_tiktok?: string | null
+          social_twitter?: string | null
+          social_youtube?: string | null
+          tagline?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          buffer_minutes?: number
+          cancellation_hours?: number
+          city?: string | null
+          country?: string | null
+          cover_url?: string | null
+          created_at?: string
+          default_currency?: string
+          default_locale?: string
+          default_timezone?: string
+          description?: string | null
+          email?: string | null
+          id?: string
+          logo_url?: string | null
+          maps_embed?: string | null
+          max_advance_days?: number
+          name?: string
+          phone?: string | null
+          reminder_hours?: number[]
+          slot_duration_minutes?: number
+          slug?: string
+          social_facebook?: string | null
+          social_instagram?: string | null
+          social_tiktok?: string | null
+          social_twitter?: string | null
+          social_youtube?: string | null
+          tagline?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          is_read: boolean
+          message: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          is_read?: boolean
+          message: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      customers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          notes: string | null
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      employee_services: {
+        Row: {
+          employee_id: string
+          service_id: string
+        }
+        Insert: {
+          employee_id: string
+          service_id: string
+        }
+        Update: {
+          employee_id?: string
+          service_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "employee_services_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "employees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "employee_services_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      employees: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          color_tag: string
+          created_at: string
+          display_order: number
+          email: string | null
+          id: string
+          is_active: boolean
+          name: string
+          phone: string | null
+          slug: string
+          specialties: string[]
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          color_tag?: string
+          created_at?: string
+          display_order?: number
+          email?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          phone?: string | null
+          slug: string
+          specialties?: string[]
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          color_tag?: string
+          created_at?: string
+          display_order?: number
+          email?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          phone?: string | null
+          slug?: string
+          specialties?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gallery_photos: {
+        Row: {
+          caption: string | null
+          created_at: string
+          display_order: number
+          employee_id: string | null
+          id: string
+          public_url: string
+          storage_path: string
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          display_order?: number
+          employee_id?: string | null
+          id?: string
+          public_url: string
+          storage_path: string
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          display_order?: number
+          employee_id?: string | null
+          id?: string
+          public_url?: string
+          storage_path?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gallery_photos_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "employees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      holidays: {
+        Row: {
+          created_at: string
+          date: string
+          employee_id: string | null
+          id: string
+          note: string | null
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          employee_id?: string | null
+          id?: string
+          note?: string | null
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          employee_id?: string | null
+          id?: string
+          note?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "holidays_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "employees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      services: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          display_order: number
+          duration_min: number
+          id: string
+          is_visible: boolean
+          name: string
+          price: number
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          duration_min: number
+          id?: string
+          is_visible?: boolean
+          name: string
+          price: number
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          duration_min?: number
+          id?: string
+          is_visible?: boolean
+          name?: string
+          price?: number
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      shop_hours: {
+        Row: {
+          close_time: string | null
+          day_of_week: number
+          id: string
+          is_closed: boolean
+          open_time: string | null
+        }
+        Insert: {
+          close_time?: string | null
+          day_of_week: number
+          id?: string
+          is_closed?: boolean
+          open_time?: string | null
+        }
+        Update: {
+          close_time?: string | null
+          day_of_week?: number
+          id?: string
+          is_closed?: boolean
+          open_time?: string | null
+        }
+        Relationships: []
+      }
+      working_hours: {
+        Row: {
+          day_of_week: number
+          employee_id: string
+          end_time: string | null
+          id: string
+          is_day_off: boolean
+          start_time: string | null
+        }
+        Insert: {
+          day_of_week: number
+          employee_id: string
+          end_time?: string | null
+          id?: string
+          is_day_off?: boolean
+          start_time?: string | null
+        }
+        Update: {
+          day_of_week?: number
+          employee_id?: string
+          end_time?: string | null
+          id?: string
+          is_day_off?: boolean
+          start_time?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "working_hours_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "employees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      show_limit: { Args: never; Returns: number }
+      show_trgm: { Args: { "": string }; Returns: string[] }
     }
     Enums: {
-      [_ in never]: never
+      appointment_status:
+        | "pending"
+        | "confirmed"
+        | "completed"
+        | "cancelled"
+        | "no_show"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +633,14 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      appointment_status: [
+        "pending",
+        "confirmed",
+        "completed",
+        "cancelled",
+        "no_show",
+      ],
+    },
   },
 } as const
