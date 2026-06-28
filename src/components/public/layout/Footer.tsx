@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Logo } from "@/components/common/Logo";import Link from "next/link";
 const Instagram = (props: any) => (
   <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor">
     <rect x="2" y="2" width="20" height="20" rx="5" />
